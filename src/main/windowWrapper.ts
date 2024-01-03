@@ -11,6 +11,8 @@ export default (url: string): BrowserWindow => {
       sandbox: false,
       disableBlinkFeatures: 'Auxclick', // Security
       preload: path.join(app.getAppPath(), 'lib/preload/index.js'),
+      webSecurity: false,
+      // devTools: true,
     },
     icon: nativeImage.createFromPath(path.join(app.getAppPath(), 'resources/icons/normal/256.png')),
     show: false,
@@ -27,6 +29,7 @@ export default (url: string): BrowserWindow => {
       window.show();
     }
     window.webContents.session.setSpellCheckerEnabled( !store.get('app.disableSpellChecker') );
+    // window.webContents.openDevTools();
   });
 
   window.loadURL(url);
