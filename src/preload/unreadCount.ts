@@ -1,22 +1,20 @@
 import {ipcRenderer} from 'electron';
 
-const targetSelectors = [
-  'div[data-tooltip="Chat"][role="group"]',
-  'div[data-tooltip="Spaces"][role="group"]'
-];
+const iframeSelector: string = 'iframe[aria-label="Chat"]';
+const homeShortcutSelector: string = 'div[aria-label^="Home shortcut"]';
 
 const getMessageCount = (): number => {
   let counter = 0;
 
-  document.body.querySelectorAll(targetSelectors.join(','))
-    .forEach((target) => {
-      const span = target.querySelector('span[role="heading"]')?.nextElementSibling
-      if (span) {
-        counter = counter + Number(span.textContent)
-      }
-    })
+  const iframe: HTMLObjectElement | null = document.querySelector(iframeSelector);
+  const iframeDocument = iframe?.contentDocument ?? iframe?.contentWindow?.document ?? null;
+  const homeShortcut = iframeDocument?.body.querySelector(homeShortcutSelector) ?? null;
+  const homeShortcutCounter = homeShortcut?.lastChild?.lastChild ?? null;
+  if (homeShortcutCounter) {
+    counter += Number(homeShortcutCounter.textContent);
+  }
 
-  return counter
+  return counter;
 }
 
 let previousCount = -1;
