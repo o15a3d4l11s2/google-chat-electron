@@ -11,7 +11,7 @@ const decideIcon = (href: string): IconTypes => {
   if (href.match(/favicon_chat_r3/) ||
     href.match(/favicon_chat_new_non_notif_r3/)) {
     type = 'normal';
-  } else if (href.match(/favicon_chat_new_notif_r3/)) {
+  } else if (href.match(/favicon_chat_new_notif_r4/)) {
     type = 'badge';
   }
 
