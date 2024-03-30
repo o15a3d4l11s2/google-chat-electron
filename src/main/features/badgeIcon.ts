@@ -8,10 +8,10 @@ type IconTypes = 'offline' | 'normal' | 'badge';
 const decideIcon = (href: string): IconTypes => {
   let type: IconTypes = 'offline';
 
-  if (href.match(/favicon_chat_r3/) ||
-    href.match(/favicon_chat_new_non_notif_r3/)) {
+  if (href.match(/favicon_chat_r5/) ||
+    href.match(/favicon_chat_new_non_notif_r5/)) {
     type = 'normal';
-  } else if (href.match(/favicon_chat_new_notif_r4/)) {
+  } else if (href.match(/favicon_chat_new_notif_r5/)) {
     type = 'badge';
   }
 
